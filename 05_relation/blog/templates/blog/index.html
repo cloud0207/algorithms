@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<h1>All QnA</h1>
+
+<ul>
+    {% comment %} {% for posting in postings %}
+    <li>
+        <a href="{% url 'accounts:profile' posting.user.username %}">{{ posting.user }}</a>: 
+        <a href="{% url 'blog:posting_detail' posting.pk %}">
+            {{ posting.title }}
+        </a>
+    </li>
+    {% endfor %} {% endcomment %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">좋아요 개수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for posting in page_obj %}
+          
+          <tr>
+            <th scope="row">{{ posting.pk }}</th>
+            <td><a href="{% url 'blog:posting_detail' posting.pk %}">{{ posting.title }}</a></td>
+            <td><a href="{% url 'accounts:profile' posting.user %}">{{ posting.user }}</a></td>
+            <td>{{ posting.like_users.count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center mt-5">
+        {% bootstrap_pagination page_obj %}
+      </div>
+</ul>
+
+
+{% endblock content %}

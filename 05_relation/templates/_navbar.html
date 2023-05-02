@@ -1,0 +1,49 @@
+<!-- _navbar.html -->
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <!-- 인증 여부 상관 없이 보임 -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:posting_index' %}">Home</a>
+            </li>
+            <!-- 인증(로그인)된 사용자라면 -->
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:create_posting' %}">New Posting</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:profile' request.user %}">
+                    {{ request.user }}'s Profile
+                </a>
+            </li>
+            <!-- 인증(로그인)되지 않은 사용자라면 -->
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signin' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!--
+LOGIN 여부
+
+x 로그인
+o 로그아웃
+x 회원가입
+o 글 쓰기
+ox 글 목록
+ox 글 상세
+o+a 글 수정
+o+a 글 삭제
+o 댓글 생성
+o+a 댓글 삭제
+ox 댓글 확인
+-->
