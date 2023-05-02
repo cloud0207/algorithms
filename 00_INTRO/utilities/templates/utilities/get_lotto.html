@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lucky Numbers</h1>
+
+<ul>
+    {% for num in lucky_numbers %}
+    <!-- {{ 출력 }} -->
+    <li>{{ num }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}
